@@ -7,6 +7,8 @@ class FormEdit extends Component {
         firstName: props.first, 
         lastName: props.last, 
         edit: false,
+        oFName: props.first,
+        oLName: props.last,
     }
     this.handleNameChange = this.handleNameChange.bind(this);
   }
@@ -19,12 +21,19 @@ class FormEdit extends Component {
 
   edit(events) {
       this.setState({
-          edit: !this.state.edit
+          edit: !this.state.edit,
+          oFName: this.state.firstName,
+          oLName: this.state.lastName
       });
   }
 
-  saveButton(events) {
-      
+  cancelButton(events) {
+      this.setState({
+          edit: false,
+          firstName: this.state.oFName,
+          lastName: this.state.oLName
+
+      })
   }
 
   render() {
@@ -35,7 +44,7 @@ class FormEdit extends Component {
           <input type= 'text' name= "firstName" value= {this.state.firstName} onChange= {this.handleNameChange} />
           <input type= 'text' name= "lastName" value= {this.state.lastName} onChange= {this.handleNameChange} />
           <button onClick={() => this.edit(this.state)}>Save</button>
-          <button onClick={() => this.edit(this.state)}>Cancel</button>
+          <button onClick={() => this.cancelButton(this.state)}>Cancel</button>
         </div>
         : <div>
             <p>First Name: {this.state.firstName}</p> 
